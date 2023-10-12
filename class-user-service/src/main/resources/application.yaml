@@ -8,6 +8,12 @@ spring:
     nacos:
       discovery:
         server-addr: 10.0.0.8:8848
+    #sentinel配置
+    sentinel:
+      transport:
+        dashboard: 10.0.0.8:8858
+        #8710-8730
+        port: 8100
 
   datasource:
     url: jdbc:mysql://10.0.0.8:3306/cloud_user?useSSL=false&useUnicode=true&characterEncoding=UTF-8

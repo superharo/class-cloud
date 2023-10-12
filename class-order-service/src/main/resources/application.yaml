@@ -8,13 +8,12 @@ spring:
     nacos:
       discovery:
         server-addr: 10.0.0.8:8848
-
-#负载均衡策略
-#调用video服务时的策略
-class-video-service:
-  ribbon:
-    NFLoadBalancerRuleClassName:
-      com.netflix.loadbalancer.RandomRule
+    #sentinel配置
+    sentinel:
+      transport:
+        dashboard: 10.0.0.8:8858
+        #8710-8730
+        port: 8000
 
   datasource:
     url: jdbc:mysql://10.0.0.8:3306/cloud_order?useSSL=false&useUnicode=true&characterEncoding=UTF-8
@@ -45,3 +44,10 @@ mybatis-plus:
   mapper-locations: classpath*:/mapper/**/*.xml
   #设置类型别名
   type-aliases-package: online.superh.common.domain
+
+#负载均衡策略
+#调用video服务时的策略
+class-video-service:
+  ribbon:
+    NFLoadBalancerRuleClassName:
+      com.netflix.loadbalancer.RandomRule

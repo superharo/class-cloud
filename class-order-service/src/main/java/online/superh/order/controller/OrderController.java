@@ -2,6 +2,7 @@ package online.superh.order.controller;
 
 import online.superh.common.domain.Video;
 import online.superh.common.domain.VideoOrder;
+import online.superh.order.api.VideoServiceApi;
 import online.superh.order.service.VideoOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
@@ -28,6 +29,8 @@ public class OrderController {
     private VideoOrderService videoOrderService;
     @Autowired
     private DiscoveryClient discoveryClient;
+    @Autowired
+    private VideoServiceApi videoServiceApi;
 
     @PostMapping("/save")
     public Object save(int videoId){
@@ -37,7 +40,9 @@ public class OrderController {
         // ServiceInstance serviceInstance = list.get(0);
         // Video video = restTemplate.getForObject("http://"+serviceInstance.getHost()+":"+serviceInstance.getPort()+ "/api/v1/video/find_by_id?id="+videoId,Video.class);
         //通过负载均衡实现
-        Video video = restTemplate.getForObject("http://class-video-service/api/v1/video/find_by_id?id="+videoId,Video.class);
+        // Video video = restTemplate.getForObject("http://class-video-service/api/v1/video/find_by_id?id="+videoId,Video.class);
+        //通过openFegin调用
+        Video video = videoServiceApi.findById(30);
         VideoOrder videoOrder = new VideoOrder();
         videoOrder.setCreateTime(new Date());
         videoOrder.setVideoId(video.getId());
