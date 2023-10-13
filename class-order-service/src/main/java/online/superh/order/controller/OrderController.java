@@ -1,5 +1,6 @@
 package online.superh.order.controller;
 
+import lombok.extern.slf4j.Slf4j;
 import online.superh.common.domain.Video;
 import online.superh.common.domain.VideoOrder;
 import online.superh.order.api.VideoServiceApi;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @version: 1.0
@@ -21,6 +23,7 @@ import java.util.Date;
  */
 @RestController
 @RequestMapping("api/v1/order")
+@Slf4j
 public class OrderController {
 
     @Autowired
@@ -42,6 +45,12 @@ public class OrderController {
         //通过负载均衡实现
         // Video video = restTemplate.getForObject("http://class-video-service/api/v1/video/find_by_id?id="+videoId,Video.class);
         //通过openFegin调用
+        log.info(Thread.currentThread().getName());
+        try {
+            TimeUnit.SECONDS.sleep(5);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         Video video = videoServiceApi.findById(30);
         VideoOrder videoOrder = new VideoOrder();
         videoOrder.setCreateTime(new Date());
