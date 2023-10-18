@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @FeignClient(value="class-api-gateway",fallback = VideoServiceApiCallback.class)
 public interface VideoServiceApi {
 
-    @GetMapping("/class-order-service/api/v1/video/find_by_id")
+    @GetMapping("/class-video-service/api/v1/video/find_by_id")
     Video findById(@RequestParam("id") int id);
 
 }

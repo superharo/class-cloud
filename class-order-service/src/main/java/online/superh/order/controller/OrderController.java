@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Date;
-import java.util.concurrent.TimeUnit;
 
 /**
  * @version: 1.0
@@ -45,12 +44,12 @@ public class OrderController {
         //通过负载均衡实现
         // Video video = restTemplate.getForObject("http://class-video-service/api/v1/video/find_by_id?id="+videoId,Video.class);
         //通过openFegin调用
-        log.info(Thread.currentThread().getName());
-        try {
-            TimeUnit.SECONDS.sleep(5);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+        // log.info(Thread.currentThread().getName());
+        // try {
+        //     TimeUnit.SECONDS.sleep(5);
+        // } catch (InterruptedException e) {
+        //     throw new RuntimeException(e);
+        // }
         Video video = videoServiceApi.findById(30);
         VideoOrder videoOrder = new VideoOrder();
         videoOrder.setCreateTime(new Date());
