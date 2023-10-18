@@ -13,6 +13,7 @@
     <module>class-user-service</module>
     <module>class-video-service</module>
     <module>class-order-service</module>
+      <module>class-api-gateway</module>
   </modules>
 
 

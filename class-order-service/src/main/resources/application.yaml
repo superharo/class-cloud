@@ -51,3 +51,7 @@ class-video-service:
   ribbon:
     NFLoadBalancerRuleClassName:
       com.netflix.loadbalancer.RandomRule
+#开启feign 对 sentinel 的支持
+feign:
+  sentinel:
+    enabled: true
