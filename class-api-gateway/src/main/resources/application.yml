@@ -13,7 +13,14 @@ spring:
           uri: lb://class-order-service #从nacos获取名称转发,lb是负载均衡轮训策略
           order: 1 #优先级，数字越⼩优先级越⾼
           predicates:
-            - Path=/class-order-service/api/v1/order/**
+            - Path=/class-order-service/**
+          filters: #过滤器，请求在传递过程中通过过滤器修改
+            - StripPrefix=1 #去掉第⼀层前缀
+        - id: class-video-service
+          uri: lb://class-video-service #从nacos获取名称转发,lb是负载均衡轮训策略
+          order: 1 #优先级，数字越⼩优先级越⾼
+          predicates:
+            - Path=/class-video-service/**
           filters: #过滤器，请求在传递过程中通过过滤器修改
             - StripPrefix=1 #去掉第⼀层前缀
       discovery:
