@@ -3,6 +3,7 @@ package online.superh.gateway;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.context.ConfigurableApplicationContext;
 
 /**
  * Hello world!
@@ -12,8 +13,13 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 @EnableDiscoveryClient
 public class AppGateway
 {
+
+
     public static void main( String[] args )
     {
-        SpringApplication.run(AppGateway.class,args);
+        ConfigurableApplicationContext applicationContext = SpringApplication.run(AppGateway.class, args);
+
+        String haro = applicationContext.getEnvironment().getProperty("haro");
+        System.out.println(haro);
     }
 }

@@ -6,7 +6,9 @@ import online.superh.common.domain.VideoOrder;
 import online.superh.order.api.VideoServiceApi;
 import online.superh.order.service.VideoOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,6 +22,7 @@ import java.util.Date;
  * @description:
  * @date: 2023-10-09 16:08
  */
+@RefreshScope
 @RestController
 @RequestMapping("api/v1/order")
 @Slf4j
@@ -34,6 +37,8 @@ public class OrderController {
     @Autowired
     private VideoServiceApi videoServiceApi;
 
+    @Value("${haro.desc}")
+    private String haroDesc;
     @PostMapping("/save")
     public Object save(int videoId){
         // Video video = restTemplate.getForObject("http://localhost:9200/api/v1/video/find_by_id?id=" + videoId, Video.class);
@@ -50,6 +55,7 @@ public class OrderController {
         // } catch (InterruptedException e) {
         //     throw new RuntimeException(e);
         // }
+        System.out.println(haroDesc);
         Video video = videoServiceApi.findById(30);
         VideoOrder videoOrder = new VideoOrder();
         videoOrder.setCreateTime(new Date());
